@@ -1,0 +1,23 @@
+{
+  "users": [
+    {"username": "admin",    "password": "Admin#2026", "role": "admin"},
+    {"username": "clerk1",   "password": "Clerk#2026", "role": "clerk"},
+    {"username": "auditor1", "password": "Audit#2026", "role": "auditor"},
+    {"username": "ana",      "password": "Ana#2026",   "role": "customer", "customerId": "C-1"},
+    {"username": "ben",      "password": "Ben#2026",   "role": "customer", "customerId": "C-2"}
+  ],
+  "items": [
+    {"id": "I-1", "name": "Compact excavator", "dailyRate": 320.00},
+    {"id": "I-2", "name": "Concrete mixer",    "dailyRate": 85.00},
+    {"id": "I-3", "name": "Pressure washer",   "dailyRate": 45.00},
+    {"id": "I-4", "name": "Scaffold tower",    "dailyRate": 60.00},
+    {"id": "I-5", "name": "Generator 5kW",     "dailyRate": 70.00}
+  ],
+  "rentals": [
+    {"id": "R-1001", "customerId": "C-1", "itemId": "I-3", "status": "Active",   "startDate": "2026-11-02", "days": 2, "dailyRate": 45.00,  "rentalTotal": 90.00,  "deposit": 18.00,  "dueAt": "2026-11-04T23:00:00.000Z", "lateFee": 0, "lateFeeWaived": false},
+    {"id": "R-1002", "customerId": "C-2", "itemId": "I-1", "status": "Reserved", "startDate": "2026-11-20", "days": 3, "dailyRate": 320.00, "rentalTotal": 864.00, "deposit": 172.80, "dueAt": "2026-11-23T23:00:00.000Z", "lateFee": 0, "lateFeeWaived": false},
+    {"id": "R-1003", "customerId": "C-1", "itemId": "I-2", "status": "Returned", "startDate": "2026-10-20", "days": 7, "dailyRate": 85.00,  "rentalTotal": 505.75, "deposit": 101.15, "dueAt": "2026-10-27T23:00:00.000Z", "lateFee": 12.75, "lateFeeWaived": false},
+    {"id": "R-1004", "customerId": "C-2", "itemId": "I-4", "status": "Active",   "startDate": "2026-10-29", "days": 5, "dailyRate": 60.00,  "rentalTotal": 270.00, "deposit": 54.00,  "dueAt": "2026-11-03T23:00:00.000Z", "lateFee": 0, "lateFeeWaived": false},
+    {"id": "R-1005", "customerId": "C-1", "itemId": "I-5", "status": "Reserved", "startDate": "2026-11-12", "days": 1, "dailyRate": 70.00,  "rentalTotal": 70.00,  "deposit": 14.00,  "dueAt": "2026-11-12T23:00:00.000Z", "lateFee": 0, "lateFeeWaived": false}
+  ]
+}

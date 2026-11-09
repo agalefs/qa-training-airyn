@@ -1,0 +1,13 @@
+{
+  "name": "rentright-playwright-starter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Day 9 starter: Playwright API tests for the RentRight sandbox",
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.49.1"
+  }
+}
