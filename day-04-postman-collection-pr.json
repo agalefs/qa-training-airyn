@@ -1,0 +1,557 @@
+{
+  "info": {
+    "_postman_id": "c1cabf65-8d7e-412d-bbe7-a294c62b206c",
+    "name": "Day 4 - Postman",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "60058378",
+    "_collection_link": "https://go.postman.co/collection/60058378-c1cabf65-8d7e-412d-bbe7-a294c62b206c?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GET Health",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/health",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Reset Restore",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const baseUrl = pm.environment.get(\"baseUrl\");\r\nconst token = pm.environment.get(\"token\");\r\n\r\npm.test(\"Reset returns 200 within 1000ms\", function () {\r\n  pm.response.to.have.status(200);\r\n  pm.expect(pm.response.responseTime).to.be.below(1000);\r\n  const body = pm.response.json();\r\n  pm.expect(body).to.be.an(\"object\");\r\n});\r\n\r\npm.test(\"Follow-up GET /rentals confirms reset state\", function (done) {\r\n  pm.sendRequest({\r\n    url: `${baseUrl}/rentals`,\r\n    method: \"GET\",\r\n    header: {\r\n      \"Authorization\": `Bearer ${token}`\r\n    }\r\n  }, function (err, res) {\r\n    pm.expect(err).to.be.null;\r\n    pm.expect(res.code).to.equal(200);\r\n    pm.expect(res.responseTime).to.be.below(1000);\r\n    const data = res.json();\r\n    const list = Array.isArray(data) ? data : data.rentals;\r\n    pm.expect(list).to.be.an(\"array\");\r\n    done();\r\n  });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/test/reset",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "test",
+            "reset"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Login Ana",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Login returns 200 and a token\", function () {\r\n    pm.response.to.have.status(200);\r\n    const data = pm.response.json();\r\n    pm.expect(data).to.have.property(\"token\");\r\n    pm.expect(data.token).to.be.a(\"string\").and.not.be.empty;\r\n    pm.environment.set(\"token\", data.token);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"{{username-ana}}\",\r\n    \"password\": \"{{password-ana}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Items",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const baseUrl = pm.environment.get(\"baseUrl\");\r\nconst token = pm.environment.get(\"token\");\r\n\r\npm.test(\"GET /items returns 200, item fields, and fast response\", function () {\r\n  pm.response.to.have.status(200);\r\n  pm.expect(pm.response.responseTime).to.be.below(1000);\r\n  const body = pm.response.json();\r\n  const items = Array.isArray(body) ? body : body.items;\r\n  pm.expect(items).to.be.an(\"array\").and.not.be.empty;\r\n  pm.expect(items[0]).to.have.all.keys(\"id\", \"name\", \"dailyRate\");\r\n});\r\n\r\npm.test(\"Follow-up GET /items confirms consistent catalog response\", function (done) {\r\n  pm.sendRequest({\r\n    url: `${baseUrl}/items`,\r\n    method: \"GET\",\r\n    header: {\r\n      \"Authorization\": `Bearer ${token}`\r\n    }\r\n  }, function (err, res) {\r\n    pm.expect(err).to.be.null;\r\n    pm.expect(res.code).to.equal(200);\r\n    pm.expect(res.responseTime).to.be.below(1000);\r\n    const data = res.json();\r\n    const items = Array.isArray(data) ? data : data.items;\r\n    pm.expect(items.length).to.be.at.least(5);\r\n    done();\r\n  });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [
+          {
+            "key": "",
+            "value": ""
+          }
+        ],
+        "url": {
+          "raw": "{{baseUrl}}/items",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "items"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Rentals",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const baseUrl = pm.environment.get(\"baseUrl\");\r\nconst token = pm.environment.get(\"token\");\r\n\r\npm.test(\"GET /rentals returns 200, rental fields, and fast response\", function () {\r\n    pm.response.to.have.status(200);\r\n    pm.expect(pm.response.responseTime).to.be.below(1000);\r\n    const body = pm.response.json();\r\n    const rentals = Array.isArray(body) ? body : body.rentals;\r\n    pm.expect(rentals).to.be.an(\"array\").and.not.be.empty;\r\n    pm.expect(rentals[0]).to.include.all.keys(\"id\", \"customerId\", \"itemId\", \"status\", \"startDate\", \"days\");\r\n    pm.environment.set(\"id\", rentals[0].id);\r\n});\r\n\r\npm.test(\"Follow-up GET /rentals confirms rentals list persists\", function (done) {\r\n    pm.sendRequest({\r\n        url: `${baseUrl}/rentals`,\r\n        method: \"GET\",\r\n        header: {\r\n            \"Authorization\": `Bearer ${token}`\r\n        }\r\n    }, function (err, res) {\r\n        pm.expect(err).to.be.null;\r\n        pm.expect(res.code).to.equal(200);\r\n        pm.expect(res.responseTime).to.be.below(1000);\r\n        const data = res.json();\r\n        const rentals = Array.isArray(data) ? data : data.rentals;\r\n        pm.expect(rentals).to.be.an(\"array\").and.not.be.empty;\r\n        done();\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"customerId\": \"C-1\",\r\n  \"itemId\": \"I-2\",\r\n  \"startDate\": \"2026-11-25\",\r\n  \"days\": 3\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/rentals",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "rentals"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET RENTALS ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const baseUrl = pm.environment.get(\"baseUrl\");\r\nconst token = pm.environment.get(\"token\");\r\nconst id = pm.environment.get(\"id\");\r\n\r\npm.test(\"GET /rentals/{{id}} returns 200, key fields, and fast response\", function () {\r\n    pm.response.to.have.status(200);\r\n    pm.expect(pm.response.responseTime).to.be.below(1000);\r\n    const rental = pm.response.json();\r\n    pm.expect(rental).to.include.all.keys(\"id\", \"customerId\", \"itemId\", \"status\", \"startDate\", \"days\");\r\n    pm.expect(rental.id).to.equal(id);\r\n});\r\n\r\npm.test(\"Follow-up GET /rentals/{id} confirms rental record matches\", function (done) {\r\n    pm.sendRequest({\r\n        url: `${baseUrl}/rentals/${id}`,\r\n        method: \"GET\",\r\n        header: {\r\n            \"Authorization\": `Bearer ${token}`\r\n        }\r\n    }, function (err, res) {\r\n        pm.expect(err).to.be.null;\r\n        pm.expect(res.code).to.equal(200);\r\n        pm.expect(res.responseTime).to.be.below(1000);\r\n        const rental = res.json();\r\n        pm.expect(rental.id).to.equal(id);\r\n        done();\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/rentals/{{id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "rentals",
+            "{{id}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET RENTALS ID invoce",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const baseUrl = pm.environment.get(\"baseUrl\");\r\nconst token = pm.environment.get(\"token\");\r\nconst invoiceRentalId = pm.environment.get(\"createdRentalId\") || pm.environment.get(\"id\");\r\n\r\npm.test(\"GET /rentals/{{id}}/invoice returns 200, I1 fields, balance, and speed\", function () {\r\n    pm.response.to.have.status(200);\r\n    pm.expect(pm.response.responseTime).to.be.below(1000);\r\n    const inv = pm.response.json();\r\n    pm.expect(inv).to.have.all.keys(\"rentalId\", \"rentalTotal\", \"deposit\", \"lateFee\", \"balance\", \"status\");\r\n    const calcBalance = Number((Number(inv.rentalTotal) - Number(inv.deposit) + Number(inv.lateFee)).toFixed(2));\r\n    pm.expect(Number(inv.balance)).to.equal(calcBalance);\r\n});\r\n\r\npm.test(\"Follow-up GET /rentals/{id}/invoice matches current state\", function (done) {\r\n    pm.sendRequest({\r\n        url: `${baseUrl}/rentals/${invoiceRentalId}/invoice`,\r\n        method: \"GET\",\r\n        header: {\r\n            \"Authorization\": `Bearer ${token}`\r\n        }\r\n    }, function (err, res) {\r\n        pm.expect(err).to.be.null;\r\n        pm.expect(res.code).to.equal(200);\r\n        pm.expect(res.responseTime).to.be.below(1000);\r\n        const inv = res.json();\r\n        const calcBalance = Number((Number(inv.rentalTotal) - Number(inv.deposit) + Number(inv.lateFee)).toFixed(2));\r\n        pm.expect(Number(inv.balance)).to.equal(calcBalance);\r\n        done();\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/rentals/{{id}}/invoice",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "rentals",
+            "{{id}}",
+            "invoice"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Rentals - Day 0",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const baseUrl = pm.environment.get(\"baseUrl\");\r\nconst token = pm.environment.get(\"token\");\r\n\r\npm.test(\"days=0 returns 422 and fast response (C2)\", function () {\r\n    pm.response.to.have.status(422);\r\n    pm.expect(pm.response.responseTime).to.be.below(1000);\r\n    const body = pm.response.json();\r\n    pm.expect(body).to.be.an(\"object\");\r\n});\r\n\r\npm.test(\"Follow-up GET /rentals confirms no rental created for days=0\", function (done) {\r\n    pm.sendRequest({\r\n        url: `${baseUrl}/rentals`,\r\n        method: \"GET\",\r\n        header: {\r\n            \"Authorization\": `Bearer ${token}`\r\n        }\r\n    }, function (err, res) {\r\n        pm.expect(err).to.be.null;\r\n        pm.expect(res.code).to.equal(200);\r\n        pm.expect(res.responseTime).to.be.below(1000);\r\n        const data = res.json();\r\n        const list = Array.isArray(data) ? data : data.rentals;\r\n        pm.expect(list).to.be.an(\"array\");\r\n        const foundZero = list.some((r) => Number(r.days) === 0);\r\n        pm.expect(foundZero).to.be.false;\r\n        done();\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"customerId\": \"C-1\",\r\n  \"itemId\": \"I-2\",\r\n  \"startDate\": \"2026-11-10\",\r\n  \"days\": 0\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/rentals",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "rentals"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Rentals - Day 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const baseUrl = pm.environment.get(\"baseUrl\");\r\nconst token = pm.environment.get(\"token\");\r\n\r\npm.test(\"days=1 succeeds with 0% discount and fast response (C2, C5)\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n    pm.expect(pm.response.responseTime).to.be.below(1000);\r\n    const data = pm.response.json();\r\n    const rental = data.rental || data;\r\n    pm.expect(rental).to.include.all.keys(\"id\", \"days\", \"rentalTotal\", \"deposit\", \"status\");\r\n    pm.expect(Number(rental.days)).to.equal(1);\r\n    pm.expect(Number(rental.rentalTotal)).to.equal(85);\r\n    pm.expect(Number(rental.deposit)).to.equal(17);\r\n    pm.environment.set(\"day1RentalId\", rental.id);\r\n});\r\n\r\npm.test(\"Follow-up GET /rentals/{id} confirms days=1 rental exists\", function (done) {\r\n    const targetId = pm.environment.get(\"day1RentalId\");\r\n    pm.sendRequest({\r\n        url: `${baseUrl}/rentals/${targetId}`,\r\n        method: \"GET\",\r\n        header: {\r\n            \"Authorization\": `Bearer ${token}`\r\n        }\r\n    }, function (err, res) {\r\n        pm.expect(err).to.be.null;\r\n        pm.expect(res.code).to.equal(200);\r\n        pm.expect(res.responseTime).to.be.below(1000);\r\n        pm.expect(res.json().id).to.equal(targetId);\r\n        done();\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"customerId\": \"C-1\",\r\n  \"itemId\": \"I-2\",\r\n  \"startDate\": \"2026-11-28\",\r\n  \"days\": 1\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/rentals",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "rentals"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Rentals - Day 30",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const baseUrl = pm.environment.get(\"baseUrl\");\r\nconst token = pm.environment.get(\"token\");\r\n\r\npm.test(\"days=30 succeeds with 20% discount and fast response (C2, C5)\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n    pm.expect(pm.response.responseTime).to.be.below(1000);\r\n    const data = pm.response.json();\r\n    const rental = data.rental || data;\r\n    pm.expect(rental).to.include.all.keys(\"id\", \"days\", \"rentalTotal\", \"deposit\", \"status\");\r\n    pm.expect(Number(rental.days)).to.equal(30);\r\n    pm.expect(Number(rental.rentalTotal)).to.equal(2040);\r\n    pm.expect(Number(rental.deposit)).to.equal(408);\r\n    pm.environment.set(\"day30RentalId\", rental.id);\r\n});\r\n\r\npm.test(\"Follow-up GET /rentals/{id} confirms days=30 rental exists\", function (done) {\r\n    const targetId = pm.environment.get(\"day30RentalId\");\r\n    pm.sendRequest({\r\n        url: `${baseUrl}/rentals/${targetId}`,\r\n        method: \"GET\",\r\n        header: {\r\n            \"Authorization\": `Bearer ${token}`\r\n        }\r\n    }, function (err, res) {\r\n        pm.expect(err).to.be.null;\r\n        pm.expect(res.code).to.equal(200);\r\n        pm.expect(res.responseTime).to.be.below(1000);\r\n        pm.expect(res.json().id).to.equal(targetId);\r\n        done();\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"customerId\": \"C-1\",\r\n    \"itemId\": \"I-2\",\r\n    \"startDate\": \"2026-11-30\",\r\n    \"days\": 30\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/rentals",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "rentals"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Rentals - Day 31",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const baseUrl = pm.environment.get(\"baseUrl\");\r\nconst token = pm.environment.get(\"token\");\r\n\r\npm.test(\"days=31 returns 422 and fast response (C2)\", function () {\r\n    pm.response.to.have.status(422);\r\n    pm.expect(pm.response.responseTime).to.be.below(1000);\r\n    const body = pm.response.json();\r\n    pm.expect(body).to.be.an(\"object\");\r\n});\r\n\r\npm.test(\"Follow-up GET /rentals confirms no rental created for days=31\", function (done) {\r\n    pm.sendRequest({\r\n        url: `${baseUrl}/rentals`,\r\n        method: \"GET\",\r\n        header: {\r\n            \"Authorization\": `Bearer ${token}`\r\n        }\r\n    }, function (err, res) {\r\n        pm.expect(err).to.be.null;\r\n        pm.expect(res.code).to.equal(200);\r\n        pm.expect(res.responseTime).to.be.below(1000);\r\n        const data = res.json();\r\n        const list = Array.isArray(data) ? data : data.rentals;\r\n        pm.expect(list).to.be.an(\"array\");\r\n        const foundInvalid = list.some((r) => Number(r.days) === 31);\r\n        pm.expect(foundInvalid).to.be.false;\r\n        done();\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"customerId\": \"C-1\",\r\n    \"itemId\": \"I-2\",\r\n    \"startDate\": \"2026-11-25\",\r\n    \"days\": 31\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/rentals",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "rentals"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Rentals - Day 3",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const baseUrl = pm.environment.get(\"baseUrl\");\r\nconst token = pm.environment.get(\"token\");\r\n\r\npm.test(\"POST /rentals passing case creates Reserved rental with C5 math\", function () {\r\n    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r\n    pm.expect(pm.response.responseTime).to.be.below(1000);\r\n    const data = pm.response.json();\r\n    const rental = data.rental || data;\r\n    pm.expect(rental).to.include.all.keys(\"id\", \"customerId\", \"itemId\", \"status\", \"startDate\", \"days\", \"rentalTotal\", \"deposit\");\r\n    pm.expect(rental.status).to.equal(\"Reserved\");\r\n    // I-2 = 85.00/day * 3 days * (1 - 0.10 discount) = 229.50; deposit = 20% = 45.90\r\n    pm.expect(Number(rental.rentalTotal)).to.equal(229.5);\r\n    pm.expect(Number(rental.deposit)).to.equal(45.9);\r\n    pm.environment.set(\"createdRentalId\", rental.id);\r\n});\r\n\r\npm.test(\"Follow-up GET /rentals/{id} confirms created rental exists\", function (done) {\r\n    const createdId = pm.environment.get(\"createdRentalId\");\r\n    pm.sendRequest({\r\n        url: `${baseUrl}/rentals/${createdId}`,\r\n        method: \"GET\",\r\n        header: {\r\n            \"Authorization\": `Bearer ${token}`\r\n        }\r\n    }, function (err, res) {\r\n        pm.expect(err).to.be.null;\r\n        pm.expect(res.code).to.equal(200);\r\n        pm.expect(res.responseTime).to.be.below(1000);\r\n        const rental = res.json();\r\n        pm.expect(rental.id).to.equal(createdId);\r\n        pm.expect(rental.status).to.equal(\"Reserved\");\r\n        done();\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"customerId\": \"C-1\",\r\n  \"itemId\": \"I-2\",\r\n  \"startDate\": \"2026-11-10\",\r\n  \"days\": 3\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/rentals",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "rentals"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Login Ben",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Login returns 200 and a token\", function () {\r\n    pm.response.to.have.status(200);\r\n    const data = pm.response.json();\r\n    pm.expect(data).to.have.property(\"token\");\r\n    pm.expect(data.token).to.be.a(\"string\").and.not.be.empty;\r\n    pm.environment.set(\"token\", data.token);\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"username\": \"{{username-ana}}\",\r\n    \"password\": \"{{password-ana}}\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/auth/login",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
