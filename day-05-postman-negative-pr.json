@@ -1,0 +1,1008 @@
+{
+	"id": "e1ba353d-d600-4af1-8ed3-7d1c80e84dfc",
+	"name": "RentRight Rentals",
+	"timestamp": "2026-11-20T15:43:05.025Z",
+	"collection_id": "60058378-c1cabf65-8d7e-412d-bbe7-a294c62b206c",
+	"folder_id": 0,
+	"environment_id": "60058378-cd1a497f-4b5e-4eb7-8030-96238e45b42a",
+	"totalPass": 40,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2026-11-20T15:43:01.955Z",
+	"totalFail": 4,
+	"results": [
+		{
+			"id": "dcf730e9-7d02-47d0-9dcc-89856d3fc8da",
+			"name": "GET Health",
+			"url": "http://localhost:4020/health",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				7
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "053876c1-fd1e-402c-8538-6c7c99e03f21",
+			"name": "POST Reset Restore",
+			"url": "http://localhost:4020/test/reset",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Reset returns 200 within 1000ms": true,
+				"Follow-up GET /rentals confirms reset state": true
+			},
+			"testPassFailCounts": {
+				"Reset returns 200 within 1000ms": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /rentals confirms reset state": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Reset returns 200 within 1000ms": true,
+					"Follow-up GET /rentals confirms reset state": true
+				}
+			]
+		},
+		{
+			"id": "09eafa88-5979-4878-a100-d84365b8e8bd",
+			"name": "POST Login Ana",
+			"url": "http://localhost:4020/auth/login",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login returns 200 and a token": true
+			},
+			"testPassFailCounts": {
+				"Login returns 200 and a token": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Login returns 200 and a token": true
+				}
+			]
+		},
+		{
+			"id": "2e3700e4-53db-4ef5-8a2c-94a853a67be8",
+			"name": "GET Items",
+			"url": "http://localhost:4020/items",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"GET /items returns 200, item fields, and fast response": true,
+				"Follow-up GET /items confirms consistent catalog response": true
+			},
+			"testPassFailCounts": {
+				"GET /items returns 200, item fields, and fast response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /items confirms consistent catalog response": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"GET /items returns 200, item fields, and fast response": true,
+					"Follow-up GET /items confirms consistent catalog response": true
+				}
+			]
+		},
+		{
+			"id": "49ddb2d6-631e-4c26-bde5-b11e6d450b3b",
+			"name": "GET Rentals",
+			"url": "http://localhost:4020/rentals",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"GET /rentals returns 200, rental fields, and fast response": true,
+				"Follow-up GET /rentals confirms rentals list persists": true
+			},
+			"testPassFailCounts": {
+				"GET /rentals returns 200, rental fields, and fast response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /rentals confirms rentals list persists": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"GET /rentals returns 200, rental fields, and fast response": true,
+					"Follow-up GET /rentals confirms rentals list persists": true
+				}
+			]
+		},
+		{
+			"id": "2390afc9-96d9-4e40-9f89-941331082db9",
+			"name": "GET RENTALS ID",
+			"url": "http://localhost:4020/rentals/R-1001",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"GET /rentals/{{id}} returns 200, key fields, and fast response": true,
+				"Follow-up GET /rentals/{id} confirms rental record matches": true
+			},
+			"testPassFailCounts": {
+				"GET /rentals/{{id}} returns 200, key fields, and fast response": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /rentals/{id} confirms rental record matches": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"GET /rentals/{{id}} returns 200, key fields, and fast response": true,
+					"Follow-up GET /rentals/{id} confirms rental record matches": true
+				}
+			]
+		},
+		{
+			"id": "6d181670-e3f3-4496-90ee-f687eceb897d",
+			"name": "GET RENTALS ID invoce",
+			"url": "http://localhost:4020/rentals/R-1001/invoice",
+			"time": 8,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"GET /rentals/{{id}}/invoice returns 200, I1 fields, balance, and speed": true
+			},
+			"testPassFailCounts": {
+				"GET /rentals/{{id}}/invoice returns 200, I1 fields, balance, and speed": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"GET /rentals/{{id}}/invoice returns 200, I1 fields, balance, and speed": true
+				}
+			]
+		},
+		{
+			"id": "8f775fbc-0b60-45f3-8779-b7b6ce21fe77",
+			"name": "POST Rentals - Day 0",
+			"url": "http://localhost:4020/rentals",
+			"time": 7,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Entity"
+			},
+			"tests": {
+				"days=0 returns 422 and fast response (C2)": true,
+				"Follow-up GET /rentals confirms no rental created for days=0": true
+			},
+			"testPassFailCounts": {
+				"days=0 returns 422 and fast response (C2)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /rentals confirms no rental created for days=0": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"days=0 returns 422 and fast response (C2)": true,
+					"Follow-up GET /rentals confirms no rental created for days=0": true
+				}
+			]
+		},
+		{
+			"id": "d2fe20c5-44fb-4d98-a8f7-6ec05c2fb869",
+			"name": "POST Rentals - Day 1 - 0% discount",
+			"url": "http://localhost:4020/rentals",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"days=1 succeeds with 0% discount and fast response (C2, C5)": true,
+				"Follow-up GET /rentals/{id} confirms days=1 rental exists": true
+			},
+			"testPassFailCounts": {
+				"days=1 succeeds with 0% discount and fast response (C2, C5)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /rentals/{id} confirms days=1 rental exists": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"days=1 succeeds with 0% discount and fast response (C2, C5)": true,
+					"Follow-up GET /rentals/{id} confirms days=1 rental exists": true
+				}
+			]
+		},
+		{
+			"id": "fc62e39a-2bf8-4d09-9757-77bc491213a6",
+			"name": "POST Rentals - Day 3 - 10% discount",
+			"url": "http://localhost:4020/rentals",
+			"time": 7,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"POST /rentals passing case creates Reserved rental with C5 math": false,
+				"Follow-up GET /rentals/{id} confirms created rental exists": true
+			},
+			"testPassFailCounts": {
+				"POST /rentals passing case creates Reserved rental with C5 math": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Follow-up GET /rentals/{id} confirms created rental exists": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"POST /rentals passing case creates Reserved rental with C5 math": false,
+					"Follow-up GET /rentals/{id} confirms created rental exists": true
+				}
+			]
+		},
+		{
+			"id": "3bb8e647-320f-4ea0-8071-ab987b4d6a92",
+			"name": "POST Rentals - Day 30 -20% discount",
+			"url": "http://localhost:4020/rentals",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"days=30 succeeds with 20% discount and fast response (C2, C5)": true,
+				"Follow-up GET /rentals/{id} confirms days=30 rental exists": true
+			},
+			"testPassFailCounts": {
+				"days=30 succeeds with 20% discount and fast response (C2, C5)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /rentals/{id} confirms days=30 rental exists": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"days=30 succeeds with 20% discount and fast response (C2, C5)": true,
+					"Follow-up GET /rentals/{id} confirms days=30 rental exists": true
+				}
+			]
+		},
+		{
+			"id": "02fec6e6-b04c-479a-bcf8-913c4cfa0f65",
+			"name": "POST Rentals - Day 31",
+			"url": "http://localhost:4020/rentals",
+			"time": 7,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"days=31 returns 409 when item is unavailable": true
+			},
+			"testPassFailCounts": {
+				"days=31 returns 409 when item is unavailable": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"days=31 returns 409 when item is unavailable": true
+				}
+			]
+		},
+		{
+			"id": "5a26e588-7eeb-4992-af56-84db2d3c96dc",
+			"name": "POST Login Ben",
+			"url": "http://localhost:4020/auth/login",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login returns 200 and a token": true
+			},
+			"testPassFailCounts": {
+				"Login returns 200 and a token": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Login returns 200 and a token": true
+				}
+			]
+		},
+		{
+			"id": "a3a25eb0-7ac8-48af-bcb3-db9870af8b4c",
+			"name": "POST Login Admin",
+			"url": "http://localhost:4020/auth/login",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login returns 200 and a token": true
+			},
+			"testPassFailCounts": {
+				"Login returns 200 and a token": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Login returns 200 and a token": true
+				}
+			]
+		},
+		{
+			"id": "cfa2c7cd-b3b7-48e1-95c4-846c44c48efe",
+			"name": "POST Login Clerk",
+			"url": "http://localhost:4020/auth/login",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login returns 200 and a token": true
+			},
+			"testPassFailCounts": {
+				"Login returns 200 and a token": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Login returns 200 and a token": true
+				}
+			]
+		},
+		{
+			"id": "7d16e643-b268-405f-93fd-a05a2dc463a1",
+			"name": "POST Login Auditor1",
+			"url": "http://localhost:4020/auth/login",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Login returns 200 and a token": true,
+				"Response has a valid token": true
+			},
+			"testPassFailCounts": {
+				"Login returns 200 and a token": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Response has a valid token": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Login returns 200 and a token": true,
+					"Response has a valid token": true
+				}
+			]
+		},
+		{
+			"id": "62c4c912-f636-4105-bc53-bd10322f8c62",
+			"name": "POST NEG Missing Field",
+			"url": "http://localhost:4020/rentals",
+			"time": 7,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Missing required field returns 400 and fast response (C1)": true
+			},
+			"testPassFailCounts": {
+				"Missing required field returns 400 and fast response (C1)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Missing required field returns 400 and fast response (C1)": true
+				}
+			]
+		},
+		{
+			"id": "e8cc0c4c-13ac-42e2-9dcc-c5ffa11d2474",
+			"name": "POST NEG Wrong types - Invalid days",
+			"url": "http://localhost:4020/rentals",
+			"time": 7,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Entity"
+			},
+			"tests": {
+				"Wrong type for days returns 422 and fast response (C2)": true
+			},
+			"testPassFailCounts": {
+				"Wrong type for days returns 422 and fast response (C2)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Wrong type for days returns 422 and fast response (C2)": true
+				}
+			]
+		},
+		{
+			"id": "78be6052-50bb-4c47-afae-ff0279e03ff1",
+			"name": "POST NEG Wrong types - Invalid days decimal",
+			"url": "http://localhost:4020/rentals",
+			"time": 7,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Entity"
+			},
+			"tests": {
+				"Wrong type for days returns 422 and fast response (C2)": true
+			},
+			"testPassFailCounts": {
+				"Wrong type for days returns 422 and fast response (C2)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Wrong type for days returns 422 and fast response (C2)": true
+				}
+			]
+		},
+		{
+			"id": "1a9f9e26-fe56-4bd0-b519-7f87ee9aabc5",
+			"name": "POST NEG Wrong types - Invalid date format",
+			"url": "http://localhost:4020/rentals",
+			"time": 7,
+			"responseCode": {
+				"code": 422,
+				"name": "Unprocessable Entity"
+			},
+			"tests": {
+				"Wrong type for days returns 422 and fast response (C2)": true
+			},
+			"testPassFailCounts": {
+				"Wrong type for days returns 422 and fast response (C2)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Wrong type for days returns 422 and fast response (C2)": true
+				}
+			]
+		},
+		{
+			"id": "11c888c9-1e1a-4b13-a359-c88784a62e16",
+			"name": "POST NEG Invalid date - Nov 31",
+			"url": "http://localhost:4020/rentals",
+			"time": 7,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Non-existent calendar date returns 422 and fast response (C2)": false,
+				"Follow-up GET /rentals confirms invalid date rental was not created": false
+			},
+			"testPassFailCounts": {
+				"Non-existent calendar date returns 422 and fast response (C2)": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Follow-up GET /rentals confirms invalid date rental was not created": {
+					"pass": 0,
+					"fail": 1
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Non-existent calendar date returns 422 and fast response (C2)": false,
+					"Follow-up GET /rentals confirms invalid date rental was not created": false
+				}
+			]
+		},
+		{
+			"id": "b1898754-6d63-4fb1-b99e-992418b7e34b",
+			"name": "POST NEG Unknown itemId",
+			"url": "http://localhost:4020/rentals",
+			"time": 7,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Unknown itemId returns 400 and fast response (C1)": true
+			},
+			"testPassFailCounts": {
+				"Unknown itemId returns 400 and fast response (C1)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Unknown itemId returns 400 and fast response (C1)": true
+				}
+			]
+		},
+		{
+			"id": "09bdb03e-b76a-499e-9ff4-3634a60539d3",
+			"name": "POST NEG Overlap days",
+			"url": "http://localhost:4020/rentals",
+			"time": 8,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {
+				"Overlapping dates on same item return 409 and fast response (C4)": false,
+				"Follow-up GET /rentals confirms overlapping rental was not created": true
+			},
+			"testPassFailCounts": {
+				"Overlapping dates on same item return 409 and fast response (C4)": {
+					"pass": 0,
+					"fail": 1
+				},
+				"Follow-up GET /rentals confirms overlapping rental was not created": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Overlapping dates on same item return 409 and fast response (C4)": false,
+					"Follow-up GET /rentals confirms overlapping rental was not created": true
+				}
+			]
+		},
+		{
+			"id": "82e0185e-b5a8-4353-be7d-5e9f3cf44ea8",
+			"name": "PATCH NEG Forbidden - Admin",
+			"url": "http://localhost:4020/rentals/R-1001/status",
+			"time": 8,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Forbidden status move returns 409 and fast response (S1)": true,
+				"Follow-up GET /rentals/{id} confirms status did not become Returned": true
+			},
+			"testPassFailCounts": {
+				"Forbidden status move returns 409 and fast response (S1)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /rentals/{id} confirms status did not become Returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Forbidden status move returns 409 and fast response (S1)": true,
+					"Follow-up GET /rentals/{id} confirms status did not become Returned": true
+				}
+			]
+		},
+		{
+			"id": "77c9323e-2a99-44e4-895d-b76421ed6398",
+			"name": "PATCH NEG Forbidden - Clerk",
+			"url": "http://localhost:4020/rentals/R-1001/status",
+			"time": 8,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Forbidden status move returns 409 and fast response (S1)": true,
+				"Follow-up GET /rentals/{id} confirms status did not become Returned": true
+			},
+			"testPassFailCounts": {
+				"Forbidden status move returns 409 and fast response (S1)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /rentals/{id} confirms status did not become Returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Forbidden status move returns 409 and fast response (S1)": true,
+					"Follow-up GET /rentals/{id} confirms status did not become Returned": true
+				}
+			]
+		},
+		{
+			"id": "b6536137-9e04-4394-9fe8-d16d898bc39b",
+			"name": "PATCH NEG Forbidden - C1 Acct",
+			"url": "http://localhost:4020/rentals/R-1001/status",
+			"time": 8,
+			"responseCode": {
+				"code": 403,
+				"name": "Forbidden"
+			},
+			"tests": {
+				"Forbidden status move returns 403 and fast response (S1)": true,
+				"Follow-up GET /rentals/{id} confirms status did not become Returned": true
+			},
+			"testPassFailCounts": {
+				"Forbidden status move returns 403 and fast response (S1)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /rentals/{id} confirms status did not become Returned": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				8
+			],
+			"allTests": [
+				{
+					"Forbidden status move returns 403 and fast response (S1)": true,
+					"Follow-up GET /rentals/{id} confirms status did not become Returned": true
+				}
+			]
+		},
+		{
+			"id": "142e8e2f-7555-422b-b184-fbf8da02a2e6",
+			"name": "POST NEG Cancel Refund",
+			"url": "http://localhost:4020/rentals/R-1001/cancel",
+			"time": 7,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Overlapping dates on same item return 409 and fast response (C4)": true,
+				"Follow-up GET /rentals confirms overlapping rental was not created": true
+			},
+			"testPassFailCounts": {
+				"Overlapping dates on same item return 409 and fast response (C4)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /rentals confirms overlapping rental was not created": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Overlapping dates on same item return 409 and fast response (C4)": true,
+					"Follow-up GET /rentals confirms overlapping rental was not created": true
+				}
+			]
+		},
+		{
+			"id": "03f3007b-cad2-45ac-8567-8cda791fa664",
+			"name": "POST NEG Late Fee - Inside Grace Period",
+			"url": "http://localhost:4020/rentals/R-1001/return",
+			"time": 7,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Return at end of 2h grace period has 0 late fee (T2)": true
+			},
+			"testPassFailCounts": {
+				"Return at end of 2h grace period has 0 late fee (T2)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Return at end of 2h grace period has 0 late fee (T2)": true
+				}
+			]
+		},
+		{
+			"id": "d97f474b-38eb-4a6d-9daf-09e3781a1825",
+			"name": "POST NEG Late Fee - Late Days Capped 3 days",
+			"url": "http://localhost:4020/rentals/R-1001/return",
+			"time": 7,
+			"responseCode": {
+				"code": 409,
+				"name": "Conflict"
+			},
+			"tests": {
+				"Late fee caps daysLate at 3 days max (T3)": true,
+				"Follow-up GET /rentals/{id}/invoice reflects lateFee and balance (I1)": true
+			},
+			"testPassFailCounts": {
+				"Late fee caps daysLate at 3 days max (T3)": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Follow-up GET /rentals/{id}/invoice reflects lateFee and balance (I1)": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				7
+			],
+			"allTests": [
+				{
+					"Late fee caps daysLate at 3 days max (T3)": true,
+					"Follow-up GET /rentals/{id}/invoice reflects lateFee and balance (I1)": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 213,
+	"collection": {
+		"requests": [
+			{
+				"id": "dcf730e9-7d02-47d0-9dcc-89856d3fc8da",
+				"method": "GET"
+			},
+			{
+				"id": "053876c1-fd1e-402c-8538-6c7c99e03f21",
+				"method": "POST"
+			},
+			{
+				"id": "09eafa88-5979-4878-a100-d84365b8e8bd",
+				"method": "POST"
+			},
+			{
+				"id": "2e3700e4-53db-4ef5-8a2c-94a853a67be8",
+				"method": "GET"
+			},
+			{
+				"id": "49ddb2d6-631e-4c26-bde5-b11e6d450b3b",
+				"method": "GET"
+			},
+			{
+				"id": "2390afc9-96d9-4e40-9f89-941331082db9",
+				"method": "GET"
+			},
+			{
+				"id": "6d181670-e3f3-4496-90ee-f687eceb897d",
+				"method": "GET"
+			},
+			{
+				"id": "8f775fbc-0b60-45f3-8779-b7b6ce21fe77",
+				"method": "POST"
+			},
+			{
+				"id": "d2fe20c5-44fb-4d98-a8f7-6ec05c2fb869",
+				"method": "POST"
+			},
+			{
+				"id": "fc62e39a-2bf8-4d09-9757-77bc491213a6",
+				"method": "POST"
+			},
+			{
+				"id": "3bb8e647-320f-4ea0-8071-ab987b4d6a92",
+				"method": "POST"
+			},
+			{
+				"id": "02fec6e6-b04c-479a-bcf8-913c4cfa0f65",
+				"method": "POST"
+			},
+			{
+				"id": "5a26e588-7eeb-4992-af56-84db2d3c96dc",
+				"method": "POST"
+			},
+			{
+				"id": "a3a25eb0-7ac8-48af-bcb3-db9870af8b4c",
+				"method": "POST"
+			},
+			{
+				"id": "cfa2c7cd-b3b7-48e1-95c4-846c44c48efe",
+				"method": "POST"
+			},
+			{
+				"id": "7d16e643-b268-405f-93fd-a05a2dc463a1",
+				"method": "POST"
+			},
+			{
+				"id": "62c4c912-f636-4105-bc53-bd10322f8c62",
+				"method": "POST"
+			},
+			{
+				"id": "e8cc0c4c-13ac-42e2-9dcc-c5ffa11d2474",
+				"method": "POST"
+			},
+			{
+				"id": "78be6052-50bb-4c47-afae-ff0279e03ff1",
+				"method": "POST"
+			},
+			{
+				"id": "1a9f9e26-fe56-4bd0-b519-7f87ee9aabc5",
+				"method": "POST"
+			},
+			{
+				"id": "11c888c9-1e1a-4b13-a359-c88784a62e16",
+				"method": "POST"
+			},
+			{
+				"id": "b1898754-6d63-4fb1-b99e-992418b7e34b",
+				"method": "POST"
+			},
+			{
+				"id": "09bdb03e-b76a-499e-9ff4-3634a60539d3",
+				"method": "POST"
+			},
+			{
+				"id": "82e0185e-b5a8-4353-be7d-5e9f3cf44ea8",
+				"method": "PATCH"
+			},
+			{
+				"id": "77c9323e-2a99-44e4-895d-b76421ed6398",
+				"method": "PATCH"
+			},
+			{
+				"id": "b6536137-9e04-4394-9fe8-d16d898bc39b",
+				"method": "PATCH"
+			},
+			{
+				"id": "142e8e2f-7555-422b-b184-fbf8da02a2e6",
+				"method": "POST"
+			},
+			{
+				"id": "03f3007b-cad2-45ac-8567-8cda791fa664",
+				"method": "POST"
+			},
+			{
+				"id": "d97f474b-38eb-4a6d-9daf-09e3781a1825",
+				"method": "POST"
+			}
+		]
+	}
+}
